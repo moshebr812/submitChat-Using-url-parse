@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat using url-parse</title>
+    <link rel="stylesheet" href="submitChat-Using-url-parse.css">
+</head>
+<body>
+<div id="mainContainer">
+    
+    <div id="divHistHeaderAndList"> 
+        <h4>Messages History - recorded messages ###CountMessages### so far</h4>
+        <div id="divMsgHist">
+            <!-- this text will be replaced by a set of divs, one div for each message "History" -->
+            ###MessageHistory###
+        </div>
+    </div>
+
+    <div id="divNewChat">
+        <h4>New Chat<h4>
+         <form action="/" method="GET" name="formSubmitMessage">
+            <label>Name:
+                <select name="nickName" aria-placeholder="....select">
+                    <option value=""></option>
+                    <option value="nCohen">nChoen</option>
+                    <option value="eDayan">eDayan</option>
+                    <option value="aMenachem">aMenachem</option>
+                    <option value="zLevi">zLevi</option>
+                    <option value="dGal">dGal</option>
+                </select>
+            </label>
+            <label>Message:
+                <input type="text" name="message" style="width: 200px;">
+            </label><br>
+            <input type="submit">
+            <button name="delMessage">DelHistory</button>
+        </form>
+        
+        
+     </div>
+
+     <div id="divMembersList">
+         <h4>Members List</h4>
+         <ol>
+             <li>Niv Cohen, Tel Aviv, nCohen</li>
+             <li>Elena Dayan, Tel Aviv, eDayan</li>
+             <li>Amir Menchem. Jerusalem, aMenachem</li>
+             <li>Ziv Levi, Jerusalem, zLevi</li>
+             <li>Duby Gal, Tel Aviv, dGal</li>
+         </ol>
+     </div>
+</div>    
+</body>
+</html>

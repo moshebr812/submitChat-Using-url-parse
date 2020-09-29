@@ -1,0 +1,14 @@
+{
+  "name": "submitchat-using-url-parse",
+  "version": "1.0.0",
+  "description": "Homework: chat using package url-parse",
+  "main": "submitChat-Using-url-parse.js",
+  "scripts": {
+    "test": "Hello 5"
+  },
+  "author": "Moshe Br 57",
+  "license": "ISC",
+  "dependencies": {
+    "url-parse": "^1.4.7"
+  }
+}

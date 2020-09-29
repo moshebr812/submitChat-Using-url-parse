@@ -1,0 +1,121 @@
+
+/* 
+flex: 1 = flex: 1 1 auto
+flex-grow: 
+flex-shrink: ratio to shrink of all items can't fit the original size of the container
+flex-basis: set the initial size
+
+
+I wanted the div-s not to stretch. align-self / alighn-items = flex-start did not help
+Only height: fit-content
+    align-self:flex-start;
+    height: fit-content;
+
+width: calc (var(--main-div-width() - 30Px); 
+
+*/
+
+html, body {
+    width: 98%;
+    height: 98%;
+    background-color:lightblue;
+    margin: 0;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid darkred;
+    width: 100%;
+    height: 100%;
+    background-color: lightpink;
+}
+
+h4 {
+    padding-left: 10px;
+    margin: 0;
+    margin: 7px 0 3px 0;
+}
+
+/* GENERAL Definitions */
+#divMaincontainer {
+    flex-direction: column;
+    /* border: 2px solid blue; */
+    background-color: transparent;
+}
+
+#divHeader, #divFooter {
+    /* Set header to fixedheight */
+    height: 50px;
+    /* the header is an item, center its text */
+    align-items: center;
+    border: none;
+    background-color:#341313;
+    color: lime;
+} 
+
+#divBody {
+    flex: 6;
+    flex-direction: row;
+}
+
+#divLeftSectionContainer, #divRightSectionContainer {
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#divChatHistoryMainContainer {
+    flex: 6;
+}
+/* the 3 main div in left section "Chat */
+#messageHistoryList {
+    display: flex;
+    flex: 1;
+    overflow-y: scroll;
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+    /* align-self: flex-start; */
+    /* align-items: flex-start; */
+    /* justify-content: flex-start;  */
+    /* flex-basis: 0vmin; */
+    /* flex-shrink: 0.5; */
+    /* flex-flow: wrap-reverse; */
+    /* border: 2px solid yellow; */
+    align-items: flex-start;
+    /* align-self: flex-start; */
+    /* align-content: flex-start; */
+}
+
+.oneMessageDiv {
+    position: relative;
+    border:2px dashed darkgreen;
+    background-color: greenyellow;
+    color: black;
+    margin: 5px 10px 0px 10px; 
+    width: 90%;
+    /* height: min-content; */
+    /* width: calc (var(--main-div-width() - 30Px); */
+    padding: 5px;
+    align-self:flex-start;
+    height: fit-content;
+}
+.oneMessageStrong {
+    padding: 5px;
+}
+
+#divSubmitChat {
+    display: flex;
+    flex: 1;
+}
+#divChatUsers {
+    display: flex;;
+    flex: 2;
+}
+
+.oneMessageTime {
+    position: absolute;
+    top: 8px;
+    right: 50px;
+    font-size: 13px;
+}
