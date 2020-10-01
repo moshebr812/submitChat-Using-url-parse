@@ -98,7 +98,8 @@ h4 {
     /* width: calc (var(--main-div-width() - 30Px); */
     padding: 5px;
     align-self:flex-start;
-    height: fit-content;
+    
+    ;
 }
 .oneMessageStrong {
     padding: 5px;
