@@ -4,16 +4,15 @@ const fileSrv = require ('fs');
 const urlSrv = require ('url-parse');
 
 // constants
-// const defaultHtmlFile = 'submitChat-Using-url-parse.html';
-// const defaultCSSFile = 'submitChat-Using-url-parse.css';
 const defaultHtmlFile = 'chatForm-url-parse.html';
 const defaultCSSFile = 'chatForm-url-parse.css';
 const msgHistoryFile = 'message-history.json';
 const activePort = 8080;
+const monthNameFormat = 'SHORT'; // options: LONG, SHORT
 let reqCounter=0;
 
 console.clear();
-console.log (`STARTING SERVER .......... port: ${activePort}`);
+console.log (`STARTING SERVER ....chatForm-url-parse,js...... port: ${activePort}`);
 
 httpSrv.createServer ( (request, response) => {
     // Skip "garbage"
@@ -26,9 +25,10 @@ httpSrv.createServer ( (request, response) => {
     console.log (`\n\nREQUEST # ${++reqCounter} RECEIVED ........................`);
     console.log (`DEBUG        request.url:  ${request.url}`);
 
-    // load the css file. Note this is generated in a separate call
-    // so for each F5 we see in as debug TWO "REQUEST #N RECEIVED"
-    if ( request.url === ('/'+defaultCSSFile) ) {
+    // Load the css file:
+    //      1. Note this is generated in a separate call from browser
+    //      2. So for each F5 we perform, we see TWO "REQUEST #N RECEIVED" printed
+    if ( request.url === ('/'+defaultCSSFile) ) {       // defaultCSSFile = 'chatForm-url-parse.css'
         let cssFile = fileSrv.readFileSync (defaultCSSFile, {encoding: 'utf-8'});
         response.writeHead ( 200, {'Content-type': 'text/css'});
         response.write (cssFile);
@@ -37,6 +37,7 @@ httpSrv.createServer ( (request, response) => {
         return 
     }
 
+    // we need this so we can access the parameters in the URL / whether input parameters or "delMessage" pressed
     const reqURL = new urlSrv(request.url, true);
     
     // Delete all Hisotry Messages 
@@ -47,6 +48,7 @@ httpSrv.createServer ( (request, response) => {
     }
 
     // load messages history file and convert it to an Array.
+    // If we deleted the file above, the Array will be empty and we are OK
     let msgHistoryArray = loadJSONFile () ;
 
     
@@ -62,10 +64,9 @@ httpSrv.createServer ( (request, response) => {
         fileSrv.writeFileSync (msgHistoryFile, JSON.stringify (msgHistoryArray));
         getTime();
     }
-    // read the HTML original HTML File
-    // console.log ('reading HTML file');
+    
+    // Re-read the HTML original HTML File
     let mainPage = fileSrv.readFileSync (defaultHtmlFile, {encoding: 'utf-8'});
-
 
     // update main HTML with number of messages so far
     mainPage = mainPage.replace ('###CountMessages###' , msgHistoryArray.length ) ; 
@@ -82,14 +83,10 @@ httpSrv.createServer ( (request, response) => {
                 ${element.message}
             </div>`
         });
-
-        // console.log ('msg for HTML\n ' + msgHistoryContent); 
     } 
-    
     
    // insert message history to main HTML
     mainPage = mainPage.replace ('###MessageHistory###' , msgHistoryContent ) ; 
-    
     
     // load the final "update" html file to DOM
     response.writeHead (200, {'Content-type': 'text/html'});
@@ -98,6 +95,7 @@ httpSrv.createServer ( (request, response) => {
     response.end();
 }).listen(activePort)
 
+//==========    loadJSONFile    ===================
 function loadJSONFile () {
     let msgHistoryArray ='';
     try {
@@ -116,25 +114,30 @@ function loadJSONFile () {
     return msgHistoryArray;
 } // END loadJSONFile()
 
+//==========    getTime    ===================
 function getTime() {
     let time = new Date();
     let timeInUIFormat = 
         dateZeroPrefix (time.getDate().toString(), 2) + '-' +
-        getMonthName (time.getMonth()) + '-' + time.getFullYear() + '  ' +
+        getMonthName (time.getMonth(), monthNameFormat) + '-' + time.getFullYear() + '  ' +
         dateZeroPrefix ( time.getHours().toString(), 2 ) + ":" + 
         dateZeroPrefix ( time.getMinutes().toString(), 2)  + ":" + 
         dateZeroPrefix ( time.getSeconds().toString(), 2 );
-
-    // console.log ('getTime(): ' + timeInUIFormat);
  
     return timeInUIFormat;
-}
+} // END getTime()
 
-function getMonthName (pMonthEnum) {
-    monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    // console.log ('getMonthName - ' + monthNames[pMonthEnum]);
-    return (monthNames[pMonthEnum]);
-}
+
+//==========    getMonthName    ===================
+function getMonthName (pMonthEnum, pFormat) {
+    monthShortNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    monthLongNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    if (pFormat==='LONG') {
+        return (monthLongNames[pMonthEnum]);    
+    } else {
+        return (monthShortNames[pMonthEnum]);
+    }
+} // END getMonthName
 
 function dateZeroPrefix (pOrgString, pRequiredLength) {
     let prefix = '0';

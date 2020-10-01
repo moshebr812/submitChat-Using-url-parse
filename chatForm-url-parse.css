@@ -82,7 +82,7 @@ h4 {
     /* flex-shrink: 0.5; */
     /* flex-flow: wrap-reverse; */
     /* border: 2px solid yellow; */
-    align-items: flex-start;
+    /* align-items: flex-start; */
     /* align-self: flex-start; */
     /* align-content: flex-start; */
 }
