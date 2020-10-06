@@ -73,18 +73,15 @@ h4 {
     display: flex;
     flex: 1;
     overflow-y: scroll;
-    /* align-items: center; */
-    /* justify-content: flex-start; */
-    /* align-self: flex-start; */
-    /* align-items: flex-start; */
-    /* justify-content: flex-start;  */
-    /* flex-basis: 0vmin; */
-    /* flex-shrink: 0.5; */
-    /* flex-flow: wrap-reverse; */
-    /* border: 2px solid yellow; */
-    /* align-items: flex-start; */
-    /* align-self: flex-start; */
-    /* align-content: flex-start; */
+    /* align-content: center;
+    align-items: center;
+    align-self: center;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center; */
+
+        /* justify content will center here verticall : not what I want */
+        /* justify-content: center; */
 }
 
 .oneMessageDiv {
@@ -94,13 +91,11 @@ h4 {
     color: black;
     margin: 5px 10px 0px 10px; 
     width: 90%;
-    /* height: min-content; */
     /* width: calc (var(--main-div-width() - 30Px); */
     padding: 5px;
     align-self:flex-start;
-    
-    ;
-}
+    height: min-content;
+ }
 .oneMessageStrong {
     padding: 5px;
 }
